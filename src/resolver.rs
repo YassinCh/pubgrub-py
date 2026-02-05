@@ -1,8 +1,8 @@
 //! The main Resolver class exposed to Python.
 
+use pubgrub::{DefaultStringReporter, OfflineDependencyProvider, PubGrubError, Ranges, Reporter};
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
-use pubgrub::{DefaultStringReporter, OfflineDependencyProvider, PubGrubError, Ranges, Reporter};
 use semver::Version;
 use std::collections::HashMap;
 
@@ -10,7 +10,6 @@ use crate::constraint::{parse_constraint, parse_version};
 use crate::package::Package;
 use crate::ResolutionError;
 
-/// The main resolver class exposed to Python.
 #[pyclass]
 pub struct Resolver {
     provider: OfflineDependencyProvider<Package, Ranges<Version>>,
@@ -18,7 +17,6 @@ pub struct Resolver {
 
 #[pymethods]
 impl Resolver {
-    /// Create a new resolver instance.
     #[new]
     pub fn new() -> Self {
         Resolver {
@@ -80,8 +78,7 @@ impl Resolver {
         let root_version = Version::new(0, 0, 0);
 
         // Build the root dependencies
-        let mut root_deps: Vec<(Package, Ranges<Version>)> =
-            Vec::with_capacity(requirements.len());
+        let mut root_deps: Vec<(Package, Ranges<Version>)> = Vec::with_capacity(requirements.len());
         for (pkg_name, constraint) in &requirements {
             let range =
                 parse_constraint(constraint).map_err(|e| PyValueError::new_err(e.to_string()))?;

@@ -4,8 +4,7 @@ from pubgrub_py._core import Resolver
 
 
 def resolve(
-    requirements: dict[str, str],
-    available: dict[str, dict[str, dict[str, str]]],
+    requirements: dict[str, str], available: dict[str, dict[str, dict[str, str]]]
 ) -> dict[str, str]:
     """Resolve dependencies using PubGrub algorithm.
 
