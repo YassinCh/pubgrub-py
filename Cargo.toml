@@ -1,0 +1,19 @@
+[package]
+name = "pubgrub-py"
+version = "0.1.0"
+edition = "2021"
+description = "Python bindings for the pubgrub dependency resolution algorithm"
+license = "MIT"
+repository = "https://github.com/YassinCh/pubgrub-py"
+keywords = ["python", "pubgrub", "dependency", "resolution"]
+categories = ["development-tools"]
+
+[lib]
+name = "_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.23", features = ["extension-module"] }
+pubgrub = "0.3"
+semver = "1.0"
+thiserror = "2.0"
